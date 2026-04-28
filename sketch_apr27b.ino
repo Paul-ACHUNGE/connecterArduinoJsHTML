@@ -55,16 +55,18 @@ void loop() {
     voix.toLowerCase();//conversion de l'ecriture en minuscule pour trouver la même ecriture avec celui qui est dans mon code
 
     //commandes pour l'allumage des lampes et leurs exteintions
-
-    bool lectureB1 = digitalRead(btnB1); //la lecture de B1 veut dire je donne l'etat du bouton 1
-    if(lectureB1 == LOW && dernierEtatB1 == HIGH){ //ç veut dire que si on vient juste d'appuyer sur le bouton poussoir
-      etatL1 = !etatL1; //on inverse l'etat alors qur le quel on est donc c'est comme la fonciton Toggle de javascript
-      digitalWrite(pinL1, etatL1 ? HIGH : LOW); // donc ici on donne à la sortie de la broche de la lampe soit l'allumage soit l'exteintion
-      delay(50); //un petit delais anti-rebond
-    }
-    dernierEtatB1 = lectureB1
-    
-
+    // bool lectureB1 = digitalRead(btnB1); //la lecture de B1 veut dire je donne l'etat du bouton 1
+    // if(lectureB1 == LOW && dernierEtatB1 == HIGH){ //ç veut dire que si on vient juste d'appuyer sur le bouton poussoir
+    //   delay(50); //un petit delais anti-rebond
+    //   etatL1 = !etatL1; //on inverse l'etat alors qur le quel on est donc c'est comme la fonciton Toggle de javascript
+    //   digitalWrite(pinL1, etatL1 ? HIGH : LOW); // donc ici on donne à la sortie de la broche de la lampe soit l'allumage soit l'exteintion
+    //   if(etatL1){
+    //     Serial.println("lampe 1 allumée");
+    //   }else{
+    //     Serial.println("lampe 1 Eteinte");
+    //   }
+    //}
+    //dernierEtatB1 = lectureB1;
     if (voix == "L1_ON") digitalWrite(pinL1, HIGH); //la requête qui allume la lampe 1
     if (voix == "L1_OFF") digitalWrite(pinL1, LOW); //la requête qui etteint la lampe 1
     if (voix == "L2_ON") digitalWrite(pinL2, HIGH); //la requête qui allume la lampe 2
@@ -85,6 +87,7 @@ void loop() {
   }
   // 2. BOUTONS PHYSIQUES en cliquant sur un BP si la lampe est etteinte alors elle s'allume
   if (digitalRead(btnB1) == LOW) digitalWrite(pinL1, HIGH);
+  // if (digitalRead(btnB1) == )
   if (digitalRead(btnB2) == LOW) digitalWrite(pinL2, HIGH);
   if (digitalRead(btnB3) == LOW) digitalWrite(pinL3, HIGH);
   // 3. VENTILATEUR (Potentiomètre actif seulement si SW1 est fermé)
