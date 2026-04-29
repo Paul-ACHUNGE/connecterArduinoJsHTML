@@ -54,33 +54,22 @@ void loop() {
     voix.trim();
     voix.toLowerCase();//conversion de l'ecriture en minuscule pour trouver la même ecriture avec celui qui est dans mon code
 
-    //commandes pour l'allumage des lampes et leurs exteintions
-    // bool lectureB1 = digitalRead(btnB1); //la lecture de B1 veut dire je donne l'etat du bouton 1
-    // if(lectureB1 == LOW && dernierEtatB1 == HIGH){ //ç veut dire que si on vient juste d'appuyer sur le bouton poussoir
-    //   delay(50); //un petit delais anti-rebond
-    //   etatL1 = !etatL1; //on inverse l'etat alors qur le quel on est donc c'est comme la fonciton Toggle de javascript
-    //   digitalWrite(pinL1, etatL1 ? HIGH : LOW); // donc ici on donne à la sortie de la broche de la lampe soit l'allumage soit l'exteintion
-    //   if(etatL1){
-    //     Serial.println("lampe 1 allumée");
-    //   }else{
-    //     Serial.println("lampe 1 Eteinte");
-    //   }
-    //}
-    //dernierEtatB1 = lectureB1;
-    if (voix == "L1_ON") digitalWrite(pinL1, HIGH); //la requête qui allume la lampe 1
-    if (voix == "L1_OFF") digitalWrite(pinL1, LOW); //la requête qui etteint la lampe 1
+    // commandes pour l'allumage des lampes et leurs exteintions
+        
+    if (voix == "Allimer lampe 1") digitalWrite(pinL1, HIGH); //la requête qui allume la lampe 1
+    if (voix == "Eteidre lampe 1") digitalWrite(pinL1, LOW); //la requête qui etteint la lampe 1
     if (voix == "L2_ON") digitalWrite(pinL2, HIGH); //la requête qui allume la lampe 2
     if (voix == "L2_OFF") digitalWrite(pinL2, LOW); //la requête qui etteint la lampe 2
     if (voix == "L3_ON") digitalWrite(pinL3, HIGH); //la requête qui allume la lampe 3
     if (voix == "L3_OFF") digitalWrite(pinL3, LOW); //la requête qui etteint la lampe 3
-    if (voix == "L_ON") { // pour allumer toutes les lampes de la maison 
+    if (voix == "Allumer toutes les lampes") { // pour allumer toutes les lampes de la maison 
       digitalWrite(pinL1, HIGH); digitalWrite(pinL2, HIGH); digitalWrite(pinL3, HIGH);
     }
-    if (voix="L_OFF"){//Eteindre toutes les lampes
+    if (voix="Eteindre toutes les lampes"){//Eteindre toutes les lampes
       digitalWrite(pinL1, LOW); digitalWrite(pinL2, LOW); digitalWrite(pinL3, LOW);
     }
     //COMMANDE POUR LE VOCAL DU VENTILLATEUR
-    if (voix.startsWith("V_")){
+    if (voix.startsWith("Allumer ventillateur")){
       int vitesse=voix.substring(2).toInt();
       analogWrite(pinEN1,vitesse);
     }
@@ -94,4 +83,26 @@ void loop() {
   if (digitalRead(sw1) == HIGH) {
     analogWrite(pinEN1, 0);
   }
+   
+  if(digitalRead(btnB1) == LOW){
+    etatL1 =! etatL1;
+    digitalWrite(pinL1, etatL1);
+    while (digitalRead(btnB1)==LOW);
+    delay(50);
+   }
+   
+    if(digitalRead(btnB2) == LOW){
+    etatL2 =! etatL2;
+    digitalWrite(pinL2, etatL2);
+    while (digitalRead(btnB2)==LOW);
+    delay(50);
+   }
+   if(digitalRead(btnB3) == LOW){
+    etatL3 =! etatL3;
+    digitalWrite(pinL3, etatL3);
+    while (digitalRead(btnB3)==LOW);
+    delay(50);
+   }
 }
+  
+
