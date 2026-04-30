@@ -11,6 +11,7 @@ int ledgreen2=8;
 int ledPieton =5;
 int switchPin = 2;
 
+
 volatile int state = HIGH;
 int OnOff = 1;//pour détecter la fin de l'interruption
 
@@ -32,7 +33,7 @@ void arret(){
   }
 
 void loop()
-{
+{   Serial.begin(9600);
   if(state == HIGH){
     Serial.println("En Fonctionnement...");
     digitalWrite(ledPieton, LOW);
